@@ -1,0 +1,24 @@
+name: initialise-gopass-summon
+description: Initialise gopass/summon for Camptocamp geospatial projects
+inputs:
+  large-secret-passphrase:
+    description: Should be secrets.LARGE_SECRET_PASSPHRASE
+    required: true
+  github-gopass-ci-token:
+    description: Should be secrets.GITHUB_GOPASS_CI_TOKEN
+    required: true
+  gopass_version:
+    description: Gopass version
+    default: 1.8.4
+  summon_version:
+    description: Summon version
+    default: 0.8.0
+  gpg-fingerprint:
+    description: The GPG key fingerprint
+    default: 30C9B913FD42EF13
+  github-repository:
+    descriontion: The GutHub repository
+    default: camptocamp/geospatial-ci-pass
+runs:
+  using: node12
+  main: index.js
