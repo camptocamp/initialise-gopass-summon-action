@@ -1,15 +1,21 @@
-#!/bin/bash
+#!/bin/bash -ex
 
+#wget -q -O- https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key | sudo apt-key add -
+#echo "deb https://dl.bintray.com/gopasspw/gopass trusty main" | sudo tee /etc/apt/sources.list.d/gopass.list
+#sudo apt update
+#sudo apt install --yes gopass
 sudo chmod o+w /usr/local/bin/
-curl --show-error --silent --location
-    https://github.com/gopasspw/gopass/releases/download/v${GOPASS_VERSION}/gopass-${GOPASS_VERSION}-linux-amd64.tar.gz
+curl --show-error --silent --location \
+    https://github.com/gopasspw/gopass/releases/download/v${GOPASS_VERSION}/gopass-${GOPASS_VERSION}-linux-amd64.tar.gz \
     -o - | tar xz gopass-${GOPASS_VERSION}-linux-amd64/gopass -O > /usr/local/bin/gopass
 chmod +x /usr/local/bin/gopass
-curl --show-error --silent --location
-    https://github.com/cyberark/summon/releases/download/v${SUMMON_VERSION}/summon-linux-amd64.tar.gz
+curl --show-error --silent --location \
+    https://github.com/cyberark/summon/releases/download/v${SUMMON_VERSION}/summon-linux-amd64.tar.gz \
     -o - | tar xz summon -O > /usr/local/bin/summon
 chmod +x /usr/local/bin/summon
 gpg --quiet --batch --yes --decrypt --passphrase=${LARGE_SECRET_PASSPHRASE} --output CI.asc CI.asc.gpg
 gpg --import CI.asc
-gopass init ${GPG_FINGERPRINT:}
+rm --force CI.asc
+gpg --list-keys
+GOPASS_DEBUG=true gopass init ${GPG_FINGERPRINT}
 gopass --yes clone https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSITORY}.git gs/ci --sync gitcli

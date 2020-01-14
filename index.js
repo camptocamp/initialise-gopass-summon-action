@@ -1,10 +1,12 @@
 const core = require('@actions/core');
 const { spawn } = require('child_process');
+const path = require('path');
 
 try {
-  const process = spawn('./install', [], {
+  const installprocess = spawn(path.resolve(__dirname, 'install'), [], {
     'stdio': ['inherit', 'inherit', 'inherit'],
     'env': {
+      PATH: process.env.PATH,
       LARGE_SECRET_PASSPHRASE: core.getInput('large-secret-passphrase'),
       GITHUB_GOPASS_CI_TOKEN: core.getInput('github-gopass-ci-token'),
       GOPASS_VERSION: core.getInput('gopass_version'),
@@ -13,20 +15,20 @@ try {
       GITHUB_REPOSITORY: core.getInput('github-repository')
     }
   });
-  process.on('error', (error => {
+  installprocess.on('error', (error => {
     console.log('error');
     console.log(error);
     core.setFailed();
   }));
-  process.on('exit', (code => {
+  installprocess.on('exit', (code => {
     if (code != 0) {
-      console.log(`exit: code`);
+      console.log(`exit: ${code}`);
       core.setFailed();
     }
   }));
-  process.on('close', (code => {
+  installprocess.on('close', (code => {
     if (code != 0) {
-      console.log(`close: code`);
+      console.log(`close: ${code}`);
       core.setFailed();
     }
   }));
