@@ -2,8 +2,9 @@ name: initialise-gopass-summon
 description: Initialise gopass/summon for Camptocamp geospatial projects
 inputs:
   large-secret-passphrase:
-    description: Should be secrets.LARGE_SECRET_PASSPHRASE
-    required: true
+    description: Deprecated
+  ci-gpg-private-key:
+    description: Should be secrets.CI_GPG_PRIVATE_KEY
   github-gopass-ci-token:
     description: Should be secrets.GITHUB_GOPASS_CI_TOKEN
     required: true
