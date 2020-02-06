@@ -15,7 +15,7 @@ curl --show-error --silent --location \
 chmod +x /usr/local/bin/summon
 if [ "${CI_GPG_PRIVATE_KEY}" ]
 then
-    echo ${CI_GPG_PRIVATE_KEY} | gpg import -
+    echo "${CI_GPG_PRIVATE_KEY}" | gpg --import - || true
 else
     gpg --quiet --batch --yes --decrypt --passphrase=${LARGE_SECRET_PASSPHRASE} --output CI.asc CI.asc.gpg
     gpg --import CI.asc
