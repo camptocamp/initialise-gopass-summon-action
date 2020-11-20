@@ -7,6 +7,7 @@ try {
     'stdio': ['inherit', 'inherit', 'inherit'],
     'env': {
       PATH: process.env.PATH,
+      HOME: process.env.HOME,
       GITHUB_ENV: process.env.GITHUB_ENV,
       PATTERNS: core.getInput('patterns'),
       CI_GPG_PRIVATE_KEY: core.getInput('ci-gpg-private-key'),

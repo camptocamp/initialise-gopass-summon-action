@@ -1,18 +1,24 @@
-#!/bin/bash -ex
+#!/bin/bash -eu
 
-#wget -q -O- https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key | sudo apt-key add -
-#echo "deb https://dl.bintray.com/gopasspw/gopass trusty main" | sudo tee /etc/apt/sources.list.d/gopass.list
-#sudo apt update
-#sudo apt install --yes gopass
+stdbuf --output=0 --error=0 echo "::group::Install gopass"
+set -x
 sudo chmod o+w /usr/local/bin/
 curl --show-error --silent --location \
     https://github.com/gopasspw/gopass/releases/download/v${GOPASS_VERSION}/gopass-${GOPASS_VERSION}-linux-amd64.tar.gz \
     -o - | tar xz gopass -O >/usr/local/bin/gopass
 chmod +x /usr/local/bin/gopass
+set +x
+stdbuf --output=0 --error=0 echo "::endgroup::"
+stdbuf --output=0 --error=0 echo "::group::Install summon"
+set -x
 curl --show-error --silent --location \
     https://github.com/cyberark/summon/releases/download/v${SUMMON_VERSION}/summon-linux-amd64.tar.gz \
     -o - | tar xz summon -O >/usr/local/bin/summon
 chmod +x /usr/local/bin/summon
+set +x
+stdbuf --output=0 --error=0 echo "::endgroup::"
+stdbuf --output=0 --error=0 echo "::group::Install private key"
+set -x
 if [ "${CI_GPG_PRIVATE_KEY}" ]; then
     echo "${CI_GPG_PRIVATE_KEY}" | gpg --import - || true
 else
@@ -21,18 +27,39 @@ else
     rm --force CI.asc
 fi
 gpg --list-keys
+set +x
+stdbuf --output=0 --error=0 echo "::endgroup::"
+
+stdbuf --output=0 --error=0 echo "::group::Init repository"
+set -x
+
+git config --global user.email || git config --global user.email "geospatial-bot@camptocamp.com"
+git config --global user.name || git config --global user.name CI
+
 GOPASS_DEBUG=true gopass init ${GPG_FINGERPRINT}
-gopass --yes clone https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSITORY}.git gs/ci --sync gitcli
+gopass clone https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSITORY}.git gs/ci --sync gitcli
+
+export SUMMON_PROVIDER=/usr/local/bin/gopass
+echo "SUMMON_PROVIDER=${SUMMON_PROVIDER}" >>${GITHUB_ENV}
+
+set +x
+stdbuf --output=0 --error=0 echo "::endgroup::"
 
 gopass list --flat | while read key; do
-    echo "::add-mask::$(gopass ${key})"
+    pass=$(gopass ${key})
+    for p in path; do
+        echo "::add-mask::${p}"
+    done
 done
 
-echo "SUMMON_PROVIDER=/usr/local/bin/gopass" >>${GITHUB_ENV}
-
 for pattern in ${PATTERNS}; do
+    stdbuf --output=0 --error=0 echo "::group::Use pattern ${pattern}"
+    set -x
+    ls ~/.local/share/gopass/stores/gs-ci/patterns/${pattern}
     (
-        cd ~/.password-store-gs-ci/patterns/${pattern}
+        cd ~/.local/share/gopass/stores/gs-ci/patterns/${pattern}
         ./apply
     )
+    set +x
+    stdbuf --output=0 --error=0 echo "::endgroup::"
 done
