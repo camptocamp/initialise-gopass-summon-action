@@ -27,3 +27,5 @@ gopass --yes clone https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSIT
 gopass list --flat | while read key; do
     echo "::add-mask::$(gopass ${key})"
 done
+
+echo "SUMMON_PROVIDER=/usr/local/bin/gopass" >>${GITHUB_ENV}
