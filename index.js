@@ -7,8 +7,8 @@ try {
     'stdio': ['inherit', 'inherit', 'inherit'],
     'env': {
       PATH: process.env.PATH,
-      LARGE_SECRET_PASSPHRASE: core.getInput('large-secret-passphrase'),
       GITHUB_ENV: process.env.GITHUB_ENV,
+      PATTERNS: core.getInput('patterns'),
       CI_GPG_PRIVATE_KEY: core.getInput('ci-gpg-private-key'),
       GITHUB_GOPASS_CI_TOKEN: core.getInput('github-gopass-ci-token'),
       GOPASS_VERSION: core.getInput('gopass_version'),
