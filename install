@@ -39,7 +39,10 @@ git config --global user.name || git config --global user.name CI
 GOPASS_DEBUG=true gopass init ${GPG_FINGERPRINT}
 gopass clone https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSITORY}.git gs/ci --sync gitcli
 
-export SUMMON_PROVIDER=/usr/local/bin/gopass
+echo '#!/bin/bash' >/usr/local/bin/gopass-wrapper
+echo 'gopass show $(echo "${@}"|tr : \ )' >>/usr/local/bin/gopass-wrapper
+
+export SUMMON_PROVIDER=/usr/local/bin/gopass-wrapper
 echo "SUMMON_PROVIDER=${SUMMON_PROVIDER}" >>${GITHUB_ENV}
 
 set +x
