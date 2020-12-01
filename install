@@ -50,8 +50,8 @@ set +x
 stdbuf --output=0 --error=0 echo "::endgroup::"
 
 gopass list --flat | while read key; do
-    pass=$(gopass ${key})
-    for p in path; do
+    pass=$(gopass show ${key})
+    for p in ${pass}; do
         echo "::add-mask::${p}"
     done
 done
