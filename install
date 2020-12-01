@@ -41,6 +41,7 @@ gopass clone https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSITORY}.g
 
 echo '#!/bin/bash' >/usr/local/bin/gopass-wrapper
 echo 'gopass show $(echo "${@}"|tr : \ )' >>/usr/local/bin/gopass-wrapper
+chmod +x /usr/local/bin/gopass-wrapper
 
 export SUMMON_PROVIDER=/usr/local/bin/gopass-wrapper
 echo "SUMMON_PROVIDER=${SUMMON_PROVIDER}" >>${GITHUB_ENV}
