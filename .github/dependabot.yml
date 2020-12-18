@@ -5,3 +5,8 @@ updates:
     schedule:
       interval: daily
       time: '02:00'
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: daily
+      time: '02:00'

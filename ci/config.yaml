@@ -4,3 +4,6 @@ checks:
     audit.yaml: False
     dependabot-auto-merge.yaml: False
     backport.yaml: False
+  codespell:
+    ignore_re:
+      - node_modules/.*
