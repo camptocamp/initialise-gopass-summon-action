@@ -1,7 +1,7 @@
 {
   "name": "initialise-gopass-summon",
   "version": "1.0.0",
-  "description": "See https://github.com/camptocamp/geospatial-ci-pass/blob/master/README.md for mor informations",
+  "description": "See https://github.com/camptocamp/geospatial-ci-pass/blob/master/README.md for more information",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
