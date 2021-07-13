@@ -4,8 +4,8 @@ const path = require('path');
 
 try {
   const installprocess = spawn(path.resolve(__dirname, 'install'), [], {
-    'stdio': ['inherit', 'inherit', 'inherit'],
-    'env': {
+    stdio: ['inherit', 'inherit', 'inherit'],
+    env: {
       PATH: process.env.PATH,
       HOME: process.env.HOME,
       GITHUB_ENV: process.env.GITHUB_ENV,
@@ -15,26 +15,26 @@ try {
       GOPASS_VERSION: core.getInput('gopass_version'),
       SUMMON_VERSION: core.getInput('summon_version'),
       GPG_FINGERPRINT: core.getInput('gpg-fingerprint'),
-      GITHUB_REPOSITORY: core.getInput('github-repository')
-    }
+      GITHUB_REPOSITORY: core.getInput('github-repository'),
+    },
   });
-  installprocess.on('error', (error => {
+  installprocess.on('error', (error) => {
     console.log('error');
     console.log(error);
     core.setFailed();
-  }));
-  installprocess.on('exit', (code => {
+  });
+  installprocess.on('exit', (code) => {
     if (code != 0) {
       console.log(`exit: ${code}`);
       core.setFailed();
     }
-  }));
-  installprocess.on('close', (code => {
+  });
+  installprocess.on('close', (code) => {
     if (code != 0) {
       console.log(`close: ${code}`);
       core.setFailed();
     }
-  }));
+  });
 } catch (error) {
   console.log('catch');
   core.setFailed(error.message);
