@@ -52,7 +52,9 @@ stdbuf --output=0 --error=0 echo "::endgroup::"
 gopass list --flat | grep -v /username$ | grep -v /url$ | grep -v /readme$ | grep -v /email$ | while read key; do
     pass=$(gopass show ${key})
     for p in ${pass}; do
-        echo "::add-mask::${p}"
+        if [[ ${#p} > 3 ]]; then
+          echo "::add-mask::${p}"
+        fi
     done
 done
 
