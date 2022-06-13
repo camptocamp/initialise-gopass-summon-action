@@ -7,6 +7,3 @@ checks:
   codespell:
     ignore_re:
       - node_modules/.*
-  dependabot_config:
-    ignore_version_files:
-      - node_modules/@actions/core/package.json
