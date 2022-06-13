@@ -37,7 +37,7 @@ git config --global user.email || git config --global user.email "geospatial-bot
 git config --global user.name || git config --global user.name CI
 
 GOPASS_DEBUG=true gopass init "${GPG_FINGERPRINT}"
-gopass clone "https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gs/ci --sync gitcli
+gopass clone --check-keys=false "https://${GITHUB_GOPASS_CI_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gs/ci --sync gitcli
 
 echo '#!/bin/bash' >/usr/local/bin/gopass-wrapper
 echo 'gopass show $(echo "${@}"|tr : \ )' >>/usr/local/bin/gopass-wrapper
