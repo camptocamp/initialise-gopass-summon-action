@@ -4,7 +4,7 @@ stdbuf --output=0 --error=0 echo "::group::Install gopass"
 set -x
 sudo chmod o+w /usr/local/bin/
 curl --show-error --silent --location \
-    "https://github.com/gopasspw/gopass/releases/download/${GOPASS_VERSION}/gopass-${GOPASS_VERSION}-linux-amd64.tar.gz" \
+    "https://github.com/gopasspw/gopass/releases/download/v${GOPASS_VERSION}/gopass-${GOPASS_VERSION}-linux-amd64.tar.gz" \
     -o - | tar xz gopass -O >/usr/local/bin/gopass
 chmod +x /usr/local/bin/gopass
 set +x
@@ -12,7 +12,7 @@ stdbuf --output=0 --error=0 echo "::endgroup::"
 stdbuf --output=0 --error=0 echo "::group::Install summon"
 set -x
 curl --show-error --silent --location \
-    "https://github.com/cyberark/summon/releases/download/${SUMMON_VERSION}/summon-linux-amd64.tar.gz" \
+    "https://github.com/cyberark/summon/releases/download/v${SUMMON_VERSION}/summon-linux-amd64.tar.gz" \
     -o - | tar xz summon -O >/usr/local/bin/summon
 chmod +x /usr/local/bin/summon
 set +x
