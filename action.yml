@@ -1,6 +1,6 @@
 ---
 name: initialise-gopass-summon
-description: Initialise gopass/summon for Camptocamp geospatial projects
+description: Initialize gopass/summon for Camptocamp geospatial projects
 inputs:
   patterns:
     description: |
