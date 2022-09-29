@@ -23,6 +23,7 @@ def main():
             "GPG_FINGERPRINT": action["inputs"]["gpg-fingerprint"]["default"],
             "GITHUB_REPOSITORY": action["inputs"]["github-repository"]["default"],
         },
+        check=True,
     )
 
 
