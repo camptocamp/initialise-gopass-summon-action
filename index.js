@@ -4,7 +4,7 @@ const path = require('path');
 
 try {
   const installprocess = spawn(path.resolve(__dirname, 'install'), [], {
-    studio: ['inherit', 'inherit', 'inherit'],
+    stdio: ['inherit', 'inherit', 'inherit'],
     env: {
       PATH: process.env.PATH,
       HOME: process.env.HOME,
