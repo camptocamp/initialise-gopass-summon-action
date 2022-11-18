@@ -27,5 +27,5 @@ inputs:
     descriontion: The GutHub repository
     default: camptocamp/geospatial-ci-pass
 runs:
-  using: node12
+  using: node16
   main: index.js
