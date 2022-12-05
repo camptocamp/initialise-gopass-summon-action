@@ -1,9 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/camptocamp/c2cciutils/master/c2cciutils/schema.json
+
 checks:
-  required_workflows:
-    clean.yaml: False
-    audit.yaml: False
-    backport.yaml: False
-    codeql.yaml: False
   codespell:
     ignore_re:
       - node_modules/.*
