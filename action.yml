@@ -24,7 +24,7 @@ inputs:
     description: The GPG key fingerprint
     default: 30C9B913FD42EF13
   github-repository:
-    descriontion: The GutHub repository
+    description: The GutHub repository
     default: camptocamp/geospatial-ci-pass
 runs:
   using: node16
