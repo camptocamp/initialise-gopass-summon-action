@@ -19,7 +19,7 @@ inputs:
     default: v1.15.5 # gopasspw/gopass
   summon_version:
     description: Summon version
-    default: v0.9.5 # cyberark/summon
+    default: v0.9.6 # cyberark/summon
   gpg-fingerprint:
     description: The GPG key fingerprint
     default: 30C9B913FD42EF13
