@@ -16,7 +16,7 @@ inputs:
     required: true
   gopass_version:
     description: Gopass version
-    default: v1.15.8 # gopasspw/gopass
+    default: v1.15.11 # gopasspw/gopass
   summon_version:
     description: Summon version
     default: v0.9.6 # cyberark/summon
