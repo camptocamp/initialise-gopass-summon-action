@@ -16,10 +16,10 @@ inputs:
     required: true
   gopass_version:
     description: Gopass version
-    default: v1.15.13 # gopasspw/gopass
+    default: v1.15.14 # gopasspw/gopass
   summon_version:
     description: Summon version
-    default: v0.10.0 # cyberark/summon
+    default: v0.10.1 # cyberark/summon
   gpg-fingerprint:
     description: The GPG key fingerprint
     default: 30C9B913FD42EF13
