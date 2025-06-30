@@ -36,7 +36,7 @@ repos:
     hooks:
       - id: shellcheck
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.33.0
+    rev: 0.33.1
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
@@ -53,14 +53,14 @@ repos:
     hooks:
       - id: ripsecrets
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 40.36.8
+    rev: 40.62.1
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.8
+    rev: v0.12.1
     hooks:
       - id: ruff-format
   - repo: https://github.com/sbrunner/python-versions-hook
-    rev: 1.0.0
+    rev: 1.1.2
     hooks:
       - id: python-versions
