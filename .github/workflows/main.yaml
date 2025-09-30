@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_EVENT: ${{ toJSON(github) }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -37,7 +37,7 @@ jobs:
       - run: gopass show "gs/ci/test-mask"
         if: env.HAS_SECRETS == 'HAS_SECRETS'
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
       - run: python3 -m pip install --requirement=ci/requirements.txt
